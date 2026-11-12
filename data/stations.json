@@ -1,0 +1,226 @@
+[
+  {
+    "id": "edmond_central",
+    "name": "Edmond \u00b7 Downtown rail area",
+    "latitude": 35.6545,
+    "longitude": -97.4783,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "edmond_south",
+    "name": "South Edmond \u00b7 rail corridor",
+    "latitude": 35.596,
+    "longitude": -97.496,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "nw63_rail",
+    "name": "NW 63rd \u00b7 rail corridor",
+    "latitude": 35.535,
+    "longitude": -97.513,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "nw23_rail",
+    "name": "NW 23rd \u00b7 rail corridor",
+    "latitude": 35.496,
+    "longitude": -97.5152,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "santa_fe",
+    "name": "Santa Fe Intermodal Station",
+    "latitude": 35.4653,
+    "longitude": -97.5149,
+    "note": "Existing intermodal landmark; future regional interchange (approximate pin)."
+  },
+  {
+    "id": "south_okc_rail",
+    "name": "South OKC \u00b7 rail corridor",
+    "latitude": 35.403,
+    "longitude": -97.514,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "moore_rail",
+    "name": "Moore \u00b7 rail corridor",
+    "latitude": 35.339,
+    "longitude": -97.494,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "north_norman_rail",
+    "name": "North Norman \u00b7 rail corridor",
+    "latitude": 35.27,
+    "longitude": -97.464,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "norman_central",
+    "name": "Norman \u00b7 Downtown rail area",
+    "latitude": 35.222,
+    "longitude": -97.444,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "reno_may",
+    "name": "W Reno / May Ave",
+    "latitude": 35.463,
+    "longitude": -97.564,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "reno_meridian",
+    "name": "W Reno / Meridian Ave",
+    "latitude": 35.463,
+    "longitude": -97.602,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "sw44_meridian",
+    "name": "SW 44th / Meridian Ave",
+    "latitude": 35.406,
+    "longitude": -97.601,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "airport",
+    "name": "Will Rogers World Airport",
+    "latitude": 35.3931,
+    "longitude": -97.6007,
+    "note": "Airport landmark; boarding location and alignment illustrative."
+  },
+  {
+    "id": "faa",
+    "name": "FAA area \u00b7 conceptual extension",
+    "latitude": 35.404,
+    "longitude": -97.625,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "nw10_may",
+    "name": "NW 10th / May Ave",
+    "latitude": 35.48,
+    "longitude": -97.565,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "nw10_macarthur",
+    "name": "NW 10th / MacArthur Blvd",
+    "latitude": 35.48,
+    "longitude": -97.618,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "reno_council",
+    "name": "W Reno / Council Rd",
+    "latitude": 35.463,
+    "longitude": -97.645,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "sw15_morgan",
+    "name": "SW 15th / Morgan Rd",
+    "latitude": 35.449,
+    "longitude": -97.687,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "reno_eastern",
+    "name": "E Reno / Eastern Ave",
+    "latitude": 35.463,
+    "longitude": -97.486,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "se29_eastern",
+    "name": "SE 29th / Eastern Ave",
+    "latitude": 35.42,
+    "longitude": -97.486,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "se29_sooner",
+    "name": "SE 29th / Sooner Rd",
+    "latitude": 35.42,
+    "longitude": -97.421,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "tinker",
+    "name": "Tinker AFB \u00b7 Lancer Gate area",
+    "latitude": 35.42,
+    "longitude": -97.388,
+    "note": "Tinker/Lancer Gate area approximation, not a verified boarding point."
+  },
+  {
+    "id": "nw23_classen",
+    "name": "NW 23rd / Classen",
+    "latitude": 35.496,
+    "longitude": -97.529,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "nw36_classen",
+    "name": "NW 36th / Classen",
+    "latitude": 35.51,
+    "longitude": -97.529,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "nw63_may",
+    "name": "NW 63rd / May Ave",
+    "latitude": 35.538,
+    "longitude": -97.564,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "state_capitol",
+    "name": "Oklahoma State Capitol",
+    "latitude": 35.4923,
+    "longitude": -97.5033,
+    "note": "Landmark used as a concept stop; no official service implied."
+  },
+  {
+    "id": "sw29_robinson",
+    "name": "SW 29th / Robinson Ave",
+    "latitude": 35.421,
+    "longitude": -97.517,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "sw59_penn",
+    "name": "SW 59th / Pennsylvania Ave",
+    "latitude": 35.398,
+    "longitude": -97.55,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "uco",
+    "name": "University of Central Oklahoma",
+    "latitude": 35.6579,
+    "longitude": -97.471,
+    "note": "Landmark served by example Citylink connection; not a confirmed rail station."
+  },
+  {
+    "id": "edmond_east",
+    "name": "East Edmond \u00b7 local service area",
+    "latitude": 35.653,
+    "longitude": -97.442,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  },
+  {
+    "id": "ou",
+    "name": "University of Oklahoma",
+    "latitude": 35.2059,
+    "longitude": -97.4457,
+    "note": "Campus landmark served by conceptual Norman local connection."
+  },
+  {
+    "id": "norman_south",
+    "name": "South Norman \u00b7 local service area",
+    "latitude": 35.184,
+    "longitude": -97.457,
+    "note": "Approximate conceptual boarding point; not a verified official stop."
+  }
+]

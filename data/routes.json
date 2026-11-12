@@ -1,0 +1,500 @@
+[
+  {
+    "id": "commuter",
+    "name": "North / South Commuter Rail",
+    "color": "#EF725C",
+    "mode": "Commuter rail",
+    "group": "regional",
+    "speed_mph": 43,
+    "station_ids": [
+      "edmond_central",
+      "edmond_south",
+      "nw63_rail",
+      "nw23_rail",
+      "santa_fe",
+      "south_okc_rail",
+      "moore_rail",
+      "north_norman_rail",
+      "norman_central"
+    ],
+    "stop_indices": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11,
+      13,
+      14
+    ],
+    "path_coordinates": [
+      [
+        35.6545,
+        -97.4783
+      ],
+      [
+        35.634,
+        -97.482
+      ],
+      [
+        35.596,
+        -97.496
+      ],
+      [
+        35.565,
+        -97.508
+      ],
+      [
+        35.535,
+        -97.513
+      ],
+      [
+        35.517,
+        -97.514
+      ],
+      [
+        35.496,
+        -97.5152
+      ],
+      [
+        35.4653,
+        -97.5149
+      ],
+      [
+        35.439,
+        -97.511
+      ],
+      [
+        35.403,
+        -97.514
+      ],
+      [
+        35.371,
+        -97.502
+      ],
+      [
+        35.339,
+        -97.494
+      ],
+      [
+        35.306,
+        -97.48
+      ],
+      [
+        35.27,
+        -97.464
+      ],
+      [
+        35.222,
+        -97.444
+      ]
+    ],
+    "dashed": false
+  },
+  {
+    "id": "west_brt",
+    "name": "West Regional Bus Rapid Transit",
+    "color": "#29A9FF",
+    "mode": "Bus rapid transit",
+    "group": "regional",
+    "speed_mph": 22,
+    "station_ids": [
+      "santa_fe",
+      "nw10_may",
+      "nw10_macarthur",
+      "reno_council",
+      "sw15_morgan"
+    ],
+    "stop_indices": [
+      0,
+      2,
+      3,
+      5,
+      7
+    ],
+    "path_coordinates": [
+      [
+        35.4653,
+        -97.5149
+      ],
+      [
+        35.48,
+        -97.515
+      ],
+      [
+        35.48,
+        -97.565
+      ],
+      [
+        35.48,
+        -97.618
+      ],
+      [
+        35.463,
+        -97.618
+      ],
+      [
+        35.463,
+        -97.645
+      ],
+      [
+        35.449,
+        -97.645
+      ],
+      [
+        35.449,
+        -97.687
+      ]
+    ],
+    "dashed": false
+  },
+  {
+    "id": "east_brt",
+    "name": "East Regional Bus Rapid Transit",
+    "color": "#365F99",
+    "mode": "Bus rapid transit",
+    "group": "regional",
+    "speed_mph": 22,
+    "station_ids": [
+      "santa_fe",
+      "reno_eastern",
+      "se29_eastern",
+      "se29_sooner",
+      "tinker"
+    ],
+    "stop_indices": [
+      0,
+      2,
+      3,
+      4,
+      5
+    ],
+    "path_coordinates": [
+      [
+        35.4653,
+        -97.5149
+      ],
+      [
+        35.463,
+        -97.5149
+      ],
+      [
+        35.463,
+        -97.486
+      ],
+      [
+        35.42,
+        -97.486
+      ],
+      [
+        35.42,
+        -97.421
+      ],
+      [
+        35.42,
+        -97.388
+      ]
+    ],
+    "dashed": false
+  },
+  {
+    "id": "airport_rail",
+    "name": "Airport Light Rail",
+    "color": "#F3B939",
+    "mode": "Light rail",
+    "group": "regional",
+    "speed_mph": 34,
+    "station_ids": [
+      "santa_fe",
+      "reno_may",
+      "reno_meridian",
+      "sw44_meridian",
+      "airport"
+    ],
+    "stop_indices": [
+      0,
+      2,
+      3,
+      4,
+      5
+    ],
+    "path_coordinates": [
+      [
+        35.4653,
+        -97.5149
+      ],
+      [
+        35.463,
+        -97.5149
+      ],
+      [
+        35.463,
+        -97.564
+      ],
+      [
+        35.463,
+        -97.602
+      ],
+      [
+        35.406,
+        -97.601
+      ],
+      [
+        35.3931,
+        -97.6007
+      ]
+    ],
+    "dashed": false
+  },
+  {
+    "id": "faa_extension",
+    "name": "Airport Rail \u00b7 FAA Extension",
+    "color": "#F2C95E",
+    "mode": "Light rail",
+    "group": "concept",
+    "speed_mph": 24,
+    "station_ids": [
+      "airport",
+      "faa"
+    ],
+    "stop_indices": [
+      0,
+      2
+    ],
+    "path_coordinates": [
+      [
+        35.3931,
+        -97.6007
+      ],
+      [
+        35.399,
+        -97.61
+      ],
+      [
+        35.404,
+        -97.625
+      ]
+    ],
+    "dashed": true
+  },
+  {
+    "id": "embark_rapid",
+    "name": "EMBARK RAPID \u00b7 NW Corridor",
+    "color": "#A2CD40",
+    "mode": "Bus rapid transit",
+    "group": "concept",
+    "speed_mph": 18,
+    "station_ids": [
+      "santa_fe",
+      "nw23_classen",
+      "nw36_classen",
+      "nw63_may"
+    ],
+    "stop_indices": [
+      0,
+      2,
+      3,
+      5
+    ],
+    "path_coordinates": [
+      [
+        35.4653,
+        -97.5149
+      ],
+      [
+        35.482,
+        -97.515
+      ],
+      [
+        35.496,
+        -97.529
+      ],
+      [
+        35.51,
+        -97.529
+      ],
+      [
+        35.527,
+        -97.54
+      ],
+      [
+        35.538,
+        -97.564
+      ]
+    ],
+    "dashed": false
+  },
+  {
+    "id": "maps4",
+    "name": "MAPS 4 Bus Rapid Transit",
+    "color": "#2F2C72",
+    "mode": "Bus rapid transit",
+    "group": "concept",
+    "speed_mph": 18,
+    "station_ids": [
+      "state_capitol",
+      "santa_fe",
+      "sw29_robinson",
+      "sw59_penn"
+    ],
+    "stop_indices": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "path_coordinates": [
+      [
+        35.4923,
+        -97.5033
+      ],
+      [
+        35.479,
+        -97.504
+      ],
+      [
+        35.4653,
+        -97.5149
+      ],
+      [
+        35.444,
+        -97.515
+      ],
+      [
+        35.421,
+        -97.517
+      ],
+      [
+        35.413,
+        -97.535
+      ],
+      [
+        35.398,
+        -97.55
+      ]
+    ],
+    "dashed": false
+  },
+  {
+    "id": "citylink",
+    "name": "Citylink \u00b7 Edmond",
+    "color": "#83B497",
+    "mode": "Local bus",
+    "group": "concept",
+    "speed_mph": 13,
+    "station_ids": [
+      "uco",
+      "edmond_central",
+      "edmond_east"
+    ],
+    "stop_indices": [
+      0,
+      1,
+      3
+    ],
+    "path_coordinates": [
+      [
+        35.6579,
+        -97.471
+      ],
+      [
+        35.6545,
+        -97.4783
+      ],
+      [
+        35.65,
+        -97.461
+      ],
+      [
+        35.653,
+        -97.442
+      ]
+    ],
+    "dashed": false
+  },
+  {
+    "id": "embark_okc",
+    "name": "EMBARK \u00b7 OKC",
+    "color": "#DFC99B",
+    "mode": "Local bus",
+    "group": "concept",
+    "speed_mph": 13,
+    "station_ids": [
+      "santa_fe",
+      "state_capitol",
+      "nw23_classen",
+      "nw36_classen"
+    ],
+    "stop_indices": [
+      0,
+      2,
+      4,
+      5
+    ],
+    "path_coordinates": [
+      [
+        35.4653,
+        -97.5149
+      ],
+      [
+        35.478,
+        -97.515
+      ],
+      [
+        35.4923,
+        -97.5033
+      ],
+      [
+        35.495,
+        -97.512
+      ],
+      [
+        35.496,
+        -97.529
+      ],
+      [
+        35.51,
+        -97.529
+      ]
+    ],
+    "dashed": false
+  },
+  {
+    "id": "embark_norman",
+    "name": "EMBARK \u00b7 Norman",
+    "color": "#C6BCD6",
+    "mode": "Local bus",
+    "group": "concept",
+    "speed_mph": 13,
+    "station_ids": [
+      "norman_central",
+      "ou",
+      "norman_south"
+    ],
+    "stop_indices": [
+      0,
+      1,
+      3
+    ],
+    "path_coordinates": [
+      [
+        35.222,
+        -97.444
+      ],
+      [
+        35.2059,
+        -97.4457
+      ],
+      [
+        35.195,
+        -97.449
+      ],
+      [
+        35.184,
+        -97.457
+      ]
+    ],
+    "dashed": false
+  }
+]
