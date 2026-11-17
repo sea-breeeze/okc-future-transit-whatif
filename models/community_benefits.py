@@ -12,6 +12,8 @@ class BenefitAssumptions:
     tailpipe_kg_co2_per_car_mile: float = 0.40
     illustrative_bus_capacity: int = 40
     illustrative_rail_capacity: int = 150
+    usable_onboard_time_share: float = 0.60
+    maintenance_usd_per_car_mile: float = 0.1104
 
 
 @dataclass(frozen=True)
@@ -21,6 +23,8 @@ class CommunityBenefits:
     potential_displaced_car_trips: float
     potential_displaced_car_miles: float
     potential_gross_tailpipe_co2_kg: float
+    potential_usable_onboard_minutes_per_rider: float
+    potential_maintenance_usd_avoided: float
 
 
 def estimate_community_benefits(
@@ -45,10 +49,15 @@ def estimate_community_benefits(
     displaced_trips = riders * share / occupancy
     displaced_miles = displaced_trips * max(0.0, stats.comparison_miles)
     kg = displaced_miles * max(0.0, assumptions.tailpipe_kg_co2_per_car_mile)
+    onboard_minutes = sum(max(0.0, leg.minutes) for leg in trip.legs)
+    usable_minutes = onboard_minutes * min(1.0, max(0.0, assumptions.usable_onboard_time_share))
+    maintenance_component = displaced_miles * max(0.0, assumptions.maintenance_usd_per_car_mile)
     return CommunityBenefits(
         potential_passengers=riders,
         illustrative_departure_capacity=capacity,
         potential_displaced_car_trips=displaced_trips,
         potential_displaced_car_miles=displaced_miles,
         potential_gross_tailpipe_co2_kg=kg,
+        potential_usable_onboard_minutes_per_rider=usable_minutes,
+        potential_maintenance_usd_avoided=maintenance_component,
     )

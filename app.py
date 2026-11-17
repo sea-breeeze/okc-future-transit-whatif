@@ -16,8 +16,8 @@ from views.map_view import build_map
 from views.statistics_view import kpi_html, leg_html
 
 BASE = Path(__file__).resolve().parent
-st.set_page_config(page_title="OKC Future Transit Explorer — Student Concept Project", page_icon="",
-                   layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="OKC | Future Transit Planner", page_icon="",
+                   layout="wide", initial_sidebar_state="collapsed")
 st.markdown(f"<style>{(BASE / 'assets' / 'styles.css').read_text(encoding='utf-8')}</style>",
             unsafe_allow_html=True)
 
@@ -98,7 +98,15 @@ with st.sidebar:
         parking = st.number_input("Parking/other cost ($)", 0.0, 40.0, 2.0, 0.5)
         comparison_speed = st.slider("Comparison average speed (mph)", 10, 70, 31, 1)
     st.divider()
-    
+    with st.expander("Planning inspiration and project status", expanded=False):
+        st.markdown(
+            "Independent UCO student project. Not affiliated with, sponsored by, "
+            "approved by, or endorsed by ONE Transit or any public agency. "
+            "[View ONE Transit's official planning materials]"
+            "(https://www.onetransit.org/discover/)."
+        )
+    st.markdown('<div class="sidebar-note">A planning concept, not live navigation. No driving route is created or displayed.</div>',
+                unsafe_allow_html=True)
 
 # --------------------------------------------------------------------
 # MODEL and CONTROLLER
@@ -121,12 +129,12 @@ for line in lines.values():
 def station_category(sid):
     services = station_services[sid]
     if len(services) > 1:
-        return (0, "⇄ Transfer hub")
+        return (0, "Transfer hub")
     if "Commuter rail" in services or "Light rail" in services:
-        return (1, " Rail")
+        return (1, "Rail")
     if "Bus rapid transit" in services:
-        return (2, " Rapid bus")
-    return (3, "🚏 Local bus")
+        return (2, "Rapid bus")
+    return (3, "Local bus")
 
 
 station_ids = sorted(stations, key=lambda sid: (
@@ -154,21 +162,48 @@ settings = ComparisonSettings(fare_usd=fare, vehicle_cost_per_mile=cost_per_mile
 # --------------------------------------------------------------------
 st.markdown('''
 <section class="hero">
-  <div class="hero-kicker">INDEPENDENT STUDENT PROJECT</div>
-  <div class="hero-title">OKC Future Transit Explorer</div>
-  <div class="hero-desc">
-    Explore conceptual transit connections across Central Oklahoma.
-    Plan hypothetical journeys and visualize potential community benefits.
-  </div>
-</section>
-''', unsafe_allow_html=True)
+  <div class="hero-kicker">ONE REGION · MORE POSSIBILITIES</div>
+  <div class="hero-title">Your city's next connection.</div>
+  <div class="hero-desc">Explore an interactive simulation of Central Oklahoma's future transit network.
+  Find routes, change lines, and see how a connected region could work.</div>
+  <div class="hero-tags"><span class="hero-tag">✧ FUTURE SYSTEM CONCEPT</span>
+  <span class="hero-tag">↗ TRANSIT-ONLY ROUTING</span><span class="hero-tag">◇ MVC + OBSERVER</span></div>
+</section>''', unsafe_allow_html=True)
 
-st.info(
-    "Independent educational project developed by a UCO student. "
-    "Not affiliated with, endorsed by, or approved by ONE Transit. "
-    "Routes, stations, travel times, and community estimates are "
-    "illustrative and are not official plans or forecasts."
+# Keep this visible on the public site; it is not an official transit tool.
+st.caption(
+    "INDEPENDENT UCO STUDENT PROJECT · Not affiliated with, sponsored by, "
+    "approved by, or endorsed by ONE Transit or any transit agency. "
+    "Conceptual map only; not for actual travel planning."
 )
+with st.expander("Project independence and important limitations", expanded=False):
+    st.markdown("""
+    **Independent educational demonstration.** This software is a student-created
+    exploration of possible transit connections. ONE Transit and other transit
+    agencies have not reviewed, approved, sponsored, or endorsed the project.
+    Names and links identify planning inspiration, not a partnership.
+
+    **Not official travel guidance.** Locations, route alignments, transfers,
+    service speeds, fares, waiting times, and vehicle capacities may be
+    simplified or invented for the simulation. Do not rely on this app for
+    travel, service availability, or public policy decisions.
+
+    **No position taken on potential impacts.** Ridership, displaced car trips,
+    CO₂, maintenance costs, study time, traffic, noise, parking, and safety are
+    possibilities explored through user-adjustable assumptions. The project
+    **neither verifies nor dismisses** these potential effects. Displaying a
+    scenario is not evidence that it will occur, or a claim that an agency
+    agrees with it. Published national reference factors are not local
+    forecasts. Other impacts and trade-offs may exist outside this model.
+
+    **Safety and emissions limits.** No number of crashes prevented, decibels
+    reduced, or net emissions saved is established by this model. Gross
+    avoided car-tailpipe CO₂ does not include transit emissions.
+
+    **Sources:** [ONE Transit planning information](https://www.onetransit.org/discover/).
+    Published factors and their limitations appear under **Sources and evidence**
+    in the Community Benefits panel.
+    """)
 
 # --------------------------------------------------------------------
 # LEFT: INTERACTIVE TRIP INPUTS
@@ -223,7 +258,12 @@ with left:
                            "board": stations[leg.from_id].name,
                            "exit": stations[leg.to_id].name,
                            "estimated_minutes": round(leg.minutes, 1)} for leg in trip.legs],
-                "warning": "Concept network; all travel times, routes and fares are illustrative."
+                "warning": (
+                    "Independent UCO student project; not affiliated with or endorsed by ONE Transit. "
+                    "All routes, stops, travel times, fares and community outcomes are illustrative "
+                    "and unverified; scenarios neither confirm nor dismiss possible impacts. "
+                    "Not for real-world travel planning."
+                )
             }
             st.download_button("Export trip details (JSON)",
                                data=json.dumps(summary, indent=2),
@@ -246,9 +286,9 @@ with right:
         help="Off: stable map with no pan, zoom, or station clicking. On: move the map and choose start/end by clicking station circles.",
     )
     st.caption(
-        "🔒 Map locked · use Starting point / Destination above."
+        "Map locked · use Starting point / Destination above."
         if not map_interactive else
-        "✳ Map active · drag to move; click a circle for START, then another for DESTINATION. Next circle begins a new trip."
+        "Map active · drag to move; click a circle for START, then another for DESTINATION. Next circle begins a new trip."
     )
     map_widget = build_map(
         stations, lines, controller.map_observer.selected_itinerary,
@@ -261,7 +301,7 @@ with right:
         # events, so they cannot trigger the old constant refresh cycle.
         from streamlit_folium import st_folium
         map_event = st_folium(
-            map_widget, height=460, use_container_width=True,
+            map_widget, height=540, use_container_width=True,
             key=f"okc_station_map_{'all' if include_local else 'regional'}",
             returned_objects=["last_object_clicked", "last_object_clicked_count"],
         )
@@ -286,7 +326,7 @@ with right:
         # A plain iframe has no Streamlit event bridge. Disabling Leaflet
         # interactions makes this a truly stationary display.
         import streamlit.components.v1 as components
-        components.html(map_widget.get_root().render(), height=460, scrolling=False)
+        components.html(map_widget.get_root().render(), height=540, scrolling=False)
 
     with st.expander("Map legend", expanded=False):
         st.markdown('<div class="line-key">'
@@ -295,12 +335,6 @@ with right:
                     '<span><i style="background:#f0ad38"></i>Transfer</span>'
                     '<span><i style="background:#355ed0"></i>Selected transit route</span>'
                     '</div>', unsafe_allow_html=True)
-        st.warning(
-                "Conceptual network: Station locations, route alignments, "
-                "travel times, and connections are approximations created "
-                "for educational simulation. Do not use this map for actual travel."
-            )
-                    
     st.markdown('<div class="section-head">Trip at a glance</div>', unsafe_allow_html=True)
     st.markdown(kpi_html(controller.statistics_observer.stats, show_comparison),
                 unsafe_allow_html=True)
@@ -311,17 +345,21 @@ with right:
 
 with benefits_col:
     st.markdown('<div class="section-head">Community outlook</div>', unsafe_allow_html=True)
-    # Conservative, clearly conditional community scenario; nothing here is
-    # an observed reduction or a claim that an actual accident was prevented.
+    # All impact values are conditional what-if scenarios, not forecasts.
+    # Keep the primary dashboard compact; secondary assumptions and notes
+    # remain collapsed and below the metrics.
     with st.expander("Potential community benefits · what-if scenario", expanded=True):
-        with st.expander("Adjust community scenario", expanded=False):
-            st.caption("Editable assumptions. These are not measured future-network forecasts.")
-            passenger_scenario = st.slider("Potential riders on this departure", 1, 150, 20, 1)
-            replacement_share = st.slider("Riders replacing a car trip (%)", 0, 100, 60, 5)
-            average_occupancy = st.slider("Average occupants per replaced car", 1.0, 3.0, 1.5, 0.1)
-            co2_factor = st.number_input("Car tailpipe kg CO₂ per mile", 0.0, 2.0, 0.40, 0.01)
-            bus_capacity = st.number_input("Illustrative bus capacity", 1, 300, 40, 5)
-            rail_capacity = st.number_input("Illustrative rail capacity", 1, 1000, 150, 10)
+        # Read prior widget state before rendering controls below the metrics.
+        # Widget keys ensure changes are applied on the next Streamlit rerun.
+        passenger_scenario = st.session_state.get("community_riders", 20)
+        replacement_share = st.session_state.get("community_car_share", 60)
+        average_occupancy = st.session_state.get("community_occupancy", 1.5)
+        co2_factor = st.session_state.get("community_co2_factor", 0.40)
+        bus_capacity = st.session_state.get("community_bus_capacity", 40)
+        rail_capacity = st.session_state.get("community_rail_capacity", 150)
+        usable_share = st.session_state.get("community_usable_share", 60)
+        maintenance_rate = st.session_state.get("community_maintenance_rate", 0.1104)
+
         if trip and controller.statistics_observer.stats:
             stats = controller.statistics_observer.stats
             assumptions = BenefitAssumptions(
@@ -331,52 +369,90 @@ with benefits_col:
                 tailpipe_kg_co2_per_car_mile=co2_factor,
                 illustrative_bus_capacity=bus_capacity,
                 illustrative_rail_capacity=rail_capacity,
+                usable_onboard_time_share=usable_share / 100,
+                maintenance_usd_per_car_mile=maintenance_rate,
             )
             benefits = estimate_community_benefits(trip, stats, lines, assumptions)
-            st.caption("Illustrative **per departure** scenario, not an official forecast or measured impact. Passenger counts and vehicle capacities are user-selected, not predictions.")
+            st.caption(
+                "**Exploratory what-if estimates only.** These are not observed outcomes, "
+                "verified predictions, or ONE Transit positions. The model neither "
+                "confirms nor dismisses these possible benefits. Results depend on "
+                "the user-adjustable assumptions below."
+            )
             st.metric("Potential riders", f"{benefits.potential_passengers:,}")
             st.metric("Car miles potentially replaced", f"{benefits.potential_displaced_car_miles:,.1f} mi")
             st.metric("Gross car tailpipe CO₂ potentially avoided", f"{benefits.potential_gross_tailpipe_co2_kg:,.1f} kg")
+            st.metric("Potential car journeys replaced", f"{benefits.potential_displaced_car_trips:,.1f}")
+            st.metric("Possible reading / study time per rider", f"{benefits.potential_usable_onboard_minutes_per_rider:,.0f} min")
+            st.metric("Maintenance cost component potentially avoided", f"${benefits.potential_maintenance_usd_avoided:,.2f}")
             st.caption(
-                f"Example limiting vehicle capacity: {benefits.illustrative_departure_capacity} riders/departure; "
-                f"roughly {benefits.potential_displaced_car_trips:.1f} car journeys could be displaced "
-                "under the chosen assumptions. This does **not** subtract transit emissions, "
-                "account for vehicle manufacturing, or establish net climate benefits."
+                "Study time is a share of estimated time **on board**, not extra time saved versus driving. "
+                "It assumes riders can use that time productively; waiting and transfers are excluded. "
+                "The maintenance figure is a component of vehicle operating costs, **not an extra amount "
+                "to add to the existing driving-cost comparison**."
             )
-            with st.expander("Sources and evidence", expanded=False):
-                st.markdown("""
-**Measured regional context (not a prediction for this future route)**
+            st.caption(
+                f"Illustrative limiting vehicle capacity: {benefits.illustrative_departure_capacity} riders/departure. "
+                "Potential car-trip replacement is not a measured traffic or congestion reduction. "
+                "Gross car-tailpipe CO₂ excludes transit operating emissions and does not establish net savings."
+            )
+        else:
+            st.caption("Select two transit-connected locations to explore potential benefits.")
 
-- [FTA: 2024 EMBARK agency profile](https://www.transit.dot.gov/sites/fta.dot.gov/files/transit_agency_profile_doc/2024/60017.pdf) — 3,244,979 reported annual unlinked passenger boardings across EMBARK services. This does **not** establish riders on a proposed line or departure.
-- [FTA: National Transit Database terminology](https://www.transit.dot.gov/ntd/national-transit-database-ntd-glossary) — a boarding is counted each time someone enters a transit vehicle; transfers may count more than once.
-- [US Department of Energy / 2022 NHTS](https://www.energy.gov/cmei/vehicles/articles/fotw-1333-march-11-2024-2022-average-number-occupants-trip-household) — 1.5 average people per US household-vehicle trip; national baseline, not a measured OKC trip occupancy.
-- [US EPA: Typical passenger vehicle](https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle) — approximately 400 grams of tailpipe CO₂ per mile for a typical passenger vehicle, equivalent to the default 0.40 kg/mile assumption.
+        with st.expander("Adjust community scenario", expanded=False):
+            st.caption("These inputs are hypothetical; the national reference rates are not local forecasts.")
+            st.slider("Potential riders on this departure", 1, 150, 20, 1, key="community_riders")
+            st.slider("Riders replacing a car trip (%)", 0, 100, 60, 5, key="community_car_share")
+            st.slider("Average occupants per replaced car", 1.0, 3.0, 1.5, 0.1, key="community_occupancy")
+            st.number_input("Car tailpipe kg CO₂ per mile", 0.0, 2.0, 0.40, 0.01, key="community_co2_factor")
+            st.number_input("Illustrative bus capacity", 1, 300, 40, 5, key="community_bus_capacity")
+            st.number_input("Illustrative rail capacity", 1, 1000, 150, 10, key="community_rail_capacity")
+            st.slider("Usable onboard time (%)", 0, 100, 60, 5, key="community_usable_share",
+                      help="What portion of in-vehicle time might be suitable for reading, homework or other tasks?")
+            st.number_input("Maintenance, repair and tire cost ($/car mile)", 0.0, 1.0, 0.1104, 0.01,
+                            key="community_maintenance_rate", format="%.4f",
+                            help="AAA's 2025 US new-vehicle average is $0.1104/mile. This is a cost component, not an additional saving.")
 
-**Not independently established:** 20 riders per departure, 60% car-trip replacement, 40 bus / 150 rail capacity. These are editable *what-if* inputs, not facts about the planned system. The CO₂ figure is **gross avoided car tailpipe emissions only**; it excludes emissions from operating transit and cannot be interpreted as net savings. No reliable number of prevented accidents can be inferred from this model.
+        with st.expander("Other possible community benefits", expanded=False):
+            st.markdown("""
+- **Road traffic:** If transit actually replaces some car journeys, there may be fewer cars on affected roads. The estimated displaced car journeys above are not a forecast of congestion or delay reduction.
+- **Noise:** Fewer car movements could lower traffic noise in some locations, but buses and trains also produce noise. No decibel reduction is calculated because sound levels depend on the existing traffic mix, speeds, location and other factors.
+- **Road safety:** Reduced car travel could change collision exposure, but this model cannot estimate crashes or injuries prevented.
+- **Parking:** Replacing driving trips could ease parking demand near destinations.
+- **Access and flexibility:** Additional transit connections could improve access to jobs, classes and services.
+
+These are topics for exploration, **not verified outcomes, guaranteed benefits, or official predictions**. The project neither confirms nor dismisses these possibilities; local studies would be needed to evaluate them.
 """)
-            with st.expander("Other possible benefits · qualitative notes", expanded=False):
-                st.markdown("""
-- **Potential safety benefit:** Fewer car journeys could reduce exposure to roadway collisions. No specific crashes prevented can be predicted or claimed from one trip.
-- **Less parking demand:** Trips replacing driving could reduce the number of parked cars needed near destinations.
-- **Improved access:** More travel options could connect people with jobs, classes, and services.
-- **More choice:** Transfer links could offer a travel alternative for people who cannot or prefer not to drive.
 
-These are possibilities, **not guaranteed outcomes**, quantified accident reductions, or statements of project effectiveness.
+        with st.expander("Sources and evidence", expanded=False):
+            st.markdown("""
+**Published reference figures (not forecasts for this proposed network)**
+
+- [FTA: 2024 EMBARK agency profile](https://www.transit.dot.gov/sites/fta.dot.gov/files/transit_agency_profile_doc/2024/60017.pdf) — 3,244,979 annual unlinked passenger boardings across EMBARK services. This does **not** predict ridership on a proposed line.
+- [FTA: National Transit Database glossary](https://www.transit.dot.gov/ntd/national-transit-database-ntd-glossary) — boardings count each time a passenger enters a vehicle, including after transfers.
+- [US DOE / 2022 National Household Travel Survey](https://www.energy.gov/cmei/vehicles/articles/fotw-1333-march-11-2024-2022-average-number-occupants-trip-household) — national average of 1.5 occupants per household vehicle trip.
+- [US EPA: Typical passenger vehicle](https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle) — approximately 0.40 kg tailpipe CO₂ per mile.
+- [AAA: Your Driving Costs 2025, fact sheet](https://newsroom.aaa.com/wp-content/uploads/2025/09/UPDATE-AAA-Fact-Sheet-Your-Driving-Cost-9.2025-1.pdf) — maintenance, repairs and tires averaged 11.04 cents per mile in AAA's national new-vehicle study. Not an OKC-specific cost or guaranteed cash saving.
+- [FHWA: Highway traffic noise fundamentals](https://www.fhwa.dot.gov/Environment/noise/regulations_and_guidance/analysis_and_abatement_guidance/polguide01.cfm) — traffic noise uses logarithmic decibel levels; simple per-car noise subtraction is not valid.
+
+**User-controlled assumptions:** Future riders, car-trip replacement share, capacity, usable onboard time and route distance are hypothetical. Published reference figures do not validate these inputs. The model neither endorses nor rejects possible effects and does not establish a net climate benefit, a congestion improvement, a noise reduction or prevented crashes. These results have not been approved or endorsed by ONE Transit.
 """)
-            with st.expander("Calculation notes and limitations", expanded=False):
-                st.write("Car trips replaced = potential riders × car-trip-replacement share ÷ car occupancy.")
-                st.write("Car miles replaced = estimated replaced trips × illustrative road distance.")
-                st.write("Gross avoided tailpipe CO₂ = estimated replaced car miles × illustrative kg CO₂/mile.")
-                st.write("These assumptions don't establish actual ridership, road safety outcomes, or net emissions savings.")
+
+        with st.expander("Calculation notes and limitations", expanded=False):
+            st.write("Potential replaced car journeys = hypothetical riders × replacement share ÷ car occupancy.")
+            st.write("Potential replaced car miles = hypothetical replaced journeys × illustrative road distance.")
+            st.write("Gross avoided car-tailpipe CO₂ = replaced car miles × kg CO₂/car mile (transit emissions excluded).")
+            st.write("Possible study/reading time per rider = estimated onboard minutes × usable-time share (not a net time saving).")
+            st.write("Maintenance cost component = replaced car miles × maintenance/repair/tire $ per mile (not added to existing vehicle cost comparison).")
+            if trip and controller.statistics_observer.stats:
+                stats = controller.statistics_observer.stats
                 st.write(f"Illustrative vehicle comparison: ${stats.comparison_cost_usd:.2f}, "
                          f"{stats.comparison_minutes:.1f} minutes. "
                          f"Transit estimate: ${stats.fare_usd:.2f}, {stats.transit_minutes:.1f} minutes. "
                          "These values may be more or less favorable depending on the trip.")
-        else:
-            st.caption("Select two transit-connected locations to explore potential benefits.")
 
 st.divider()
 st.caption("Sources: ONE Transit System Plan and corridor descriptions · "
            "[Discover the plan](https://www.onetransit.org/discover/) · "
            "[Official project overview](https://www.onetransit.org/projects/). "
-           "Not affiliated with ONE Transit. Built with Python, Streamlit, Folium, NumPy, NetworkX, MVC and Observer.")
+           "Independent UCO student project; not affiliated with, approved by, or endorsed by ONE Transit. Scenario figures are not forecasts or established outcomes. Built with Python, Streamlit, Folium, NumPy, NetworkX, MVC and Observer.")

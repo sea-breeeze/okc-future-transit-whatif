@@ -1,26 +1,12 @@
-# OKC Future Transit Explorer
+# OKC Future Transit Planner
 
-An independent student software engineering project inspired by proposed public transportation improvements in Central Oklahoma.
+A runnable **Python + Streamlit + Folium** prototype of Central Oklahoma's proposed future transit network, with **MVC architecture**, an **Observer pattern**, transit-only routing with NetworkX, NumPy-accelerated distance calculations, a lightweight rounded dashboard, and estimated trip statistics.
 
-Built with Python, Streamlit, Folium, NetworkX, and NumPy, using MVC architecture and the Observer design pattern.
+> **INDEPENDENT STUDENT PROJECT — NOT AN OFFICIAL TRANSIT SERVICE.** This is a UCO student-built educational simulation. It is **not affiliated with, sponsored by, approved by, or endorsed by ONE Transit or any transit agency**. The project does not speak for ONE Transit. The network, stop locations, service patterns, travel times, fares, and scenario inputs are conceptual and are not real-world navigation guidance.
 
-## Project Purpose
+> **SCENARIOS, NOT VERIFIED OUTCOMES.** Figures about potential riders, car journeys, CO₂, maintenance costs, reading/study time, traffic, noise, and safety explore possibilities; they do **not** establish actual effects, guarantees, or official forecasts. Presenting a possibility does **not** mean the project accepts it as true or rejects it as false. Published national factors are references, not local forecasts. Crash prevention, net CO₂ reductions, decibel reductions, and congestion improvements are **not quantified or claimed**. Other effects and trade-offs may be outside this model.
 
-This interactive simulator explores how conceptual regional transit connections could work. Users can select destinations, explore hypothetical transit routes, and estimate possible travel and community benefits.
-
-## Important Disclaimer
-
-This is an independent educational project developed by a University of Central Oklahoma student.
-
-It is not affiliated with, endorsed by, or approved by ONE Transit or any transit agency.
-
-Station locations, route alignments, travel times, fares, passenger counts, and community-benefit estimates are illustrative. They should not be interpreted as official plans, verified forecasts, or real-world travel guidance.
-
-Published reference data is identified separately from hypothetical scenario assumptions.
-
-## Official Planning Reference
-
-ONE Transit: https://www.onetransit.org/discover/
+The simulator is inspired by [ONE Transit's public planning information](https://www.onetransit.org/discover/), linked for attribution rather than to imply an endorsement. Please consult official sources for real service and planning decisions.
 
 ## Launch in VS Code (macOS)
 
@@ -62,6 +48,17 @@ python -m streamlit run app.py
 - Export a trip itinerary as JSON.
 - Accessible note: browser prefers-reduced-motion is honored in the UI stylesheet.
 
+## Additional potential community benefits (scenario only)
+
+The expanded **Potential community benefits** panel now includes:
+
+- **Possible onboard reading/study time per rider**, based on modeled in-vehicle minutes and an editable share of time that might be usable. This is *not* extra time saved compared with driving, and may not be practical for all passengers or journeys.
+- **Potential maintenance/repair/tire cost component** from displaced car miles. The default of **$0.1104 per car mile** is from [AAA's 2025 Your Driving Costs fact sheet](https://newsroom.aaa.com/wp-content/uploads/2025/09/UPDATE-AAA-Fact-Sheet-Your-Driving-Cost-9.2025-1.pdf). **Do not add this to the existing vehicle-cost comparison**, which already includes operating costs.
+- **Potential replaced car journeys**, derived from hypothetical riders, their assumed car-replacement share and average vehicle occupancy. This is not a measured congestion reduction.
+- Qualitative notes on traffic, noise, parking and road safety, without claiming a measurable reduction in decibels, crashes or traffic delays. [FHWA's traffic noise guidance](https://www.fhwa.dot.gov/Environment/noise/regulations_and_guidance/analysis_and_abatement_guidance/polguide01.cfm) explains why sound levels cannot be reduced by simply subtracting a per-car decibel value.
+
+Controls for these assumptions remain in a **collapsed** expander below the community metrics. The app sidebar starts **collapsed**, and station dropdown labels use text-only service categories.
+
 ## Project structure / MVC + Observer
 
 ```text
@@ -87,7 +84,6 @@ okc-future-transit/
 │   └── routes.json               # Edit line geometry, stops, speeds and colors
 ├── assets/
 │   ├── styles.css                # Layout, rounded corners, hover transitions
-│   └── reference_future_transit.jpg # Your supplied map illustration
 ├── tests/test_network.py
 ├── requirements.txt
 └── .streamlit/config.toml
@@ -202,3 +198,10 @@ The collapsed **Potential community benefits** section estimates a scenario for 
 The right-side community benefits panel opens by default. Its editable sliders are nested directly beneath the benefits summary in **Adjust community scenario**. Journey details remain collapsed until opened. Icons/emoji have been removed from the UI labels.
 
 **Grounding:** FTA 2024 EMBARK agency profile reports 3,244,979 annual unlinked boardings (https://www.transit.dot.gov/sites/fta.dot.gov/files/transit_agency_profile_doc/2024/60017.pdf), which are not a forecast for this conceptual route. The US Department of Energy reports 1.5 persons per household vehicle trip based on 2022 NHTS (https://www.energy.gov/cmei/vehicles/articles/fotw-1333-march-11-2024-2022-average-number-occupants-trip-household). EPA estimates ~400 g CO2/mile for a typical passenger vehicle (https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle). The 20-passenger starting scenario, replacement share, and bus/rail capacity are **unverified user-editable assumptions**, not sourced ridership or fleet capacity. No crash reduction number is asserted.
+
+
+## Public sharing and attribution
+
+The Streamlit app displays a visible independence statement at the top, detailed limitations in an expandable section, and a reminder alongside the community estimates. A public link to ONE Transit's planning materials replaces the previously bundled third-party reference image. This does not imply ONE Transit reviewed or supports the simulation.
+
+The app is an exploratory software engineering exercise. It neither endorses nor rejects hypotheses about community impacts; further localized evidence would be needed before drawing policy or safety conclusions.
