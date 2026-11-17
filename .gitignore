@@ -4,9 +4,9 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .DS_Store
-
 .streamlit/secrets.toml
 .env
 .env.*
-
+.devcontainer.*
+.devcontainer/devcontainer.json
 preview_map.html
